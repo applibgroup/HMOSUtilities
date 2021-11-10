@@ -1,7 +1,10 @@
-# AndroidUtilities
-Simple utilities I've found to be userful in Android apps and libraries.
+# HijriDatePickerUtilities
+Simple utilities I've found to be userful in HijriDatePicker apps and libraries.
 
 **SUPPORT NOTICE: This library is now STABLE. It is no longer under active development, however pull requests from others are still being accepted.**
+# HMOSUtilities
+[![Build](https://github.com/applibgroup/HMOSUtilities/actions/workflows/main.yml/badge.svg)](https://github.com/applibgroup/HMOSUtilities/actions/workflows/main.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=applibgroup_HMOSUtilities&metric=alert_status)](https://sonarcloud.io/dashboard?id=applibgroup_HMOSUtilities)
 
 ## Dependency
 To use the library, add the following to your gradle build file:
@@ -11,11 +14,11 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.matthew-tamlin:android-utilities:5.1.2'
+  implementation 'com.matthew-tamlin:HijriDatePicker-utilities:5.1.2'
 }
 ```
 
-Older versions are available in the [maven repo](https://bintray.com/matthewtamlin/maven/AndroidUtilities/view).
+Older versions are available in the [maven repo](https://bintray.com/matthewtamlin/maven/HijriDatePickerUtilities/view).
  
 ## Helpers
 The helpers package contains the following classes:
@@ -167,4 +170,4 @@ int accentColor = ThemeColorHelper.getAccentColor(context, defaultColor);
 ```
 
 ## Compatibility
-This library is compatible with Android 14 and up.
+This library is compatible with HijriDatePicker 14 and up.
