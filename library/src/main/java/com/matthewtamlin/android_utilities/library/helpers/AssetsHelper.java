@@ -16,7 +16,7 @@
 
 package com.matthewtamlin.android_utilities.library.helpers;
 
-import android.content.res.AssetManager;
+import ohos.global.resource.ResourceManager;
 
 import com.matthewtamlin.java_utilities.testing.Tested;
 
@@ -52,7 +52,7 @@ public class AssetsHelper {
 	 * 		if {@code targetDirectory} is null
 	 */
 	public static void copyAssetsToDirectory(
-			final AssetManager assetsManager,
+			final ResourceManager assetsManager,
 			final File targetDirectory,
 			final String... assets)
 			throws IOException {
@@ -68,7 +68,7 @@ public class AssetsHelper {
 			OutputStream toTarget = null;
 
 			try {
-				fromAssets = assetsManager.open(filename);
+				fromAssets = assetsManager.getRawFileEntry(filename);
 				toTarget = new FileOutputStream(targetFile);
 
 				copyData(fromAssets, toTarget);

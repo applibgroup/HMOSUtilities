@@ -17,7 +17,7 @@
 package com.matthewtamlin.android_utilities.testing;
 
 import android.content.Context;
-import android.content.res.AssetManager;
+import ohos.global.resource.ResourceManager;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 

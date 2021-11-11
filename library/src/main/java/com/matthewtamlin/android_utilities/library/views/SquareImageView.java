@@ -17,9 +17,9 @@
 package com.matthewtamlin.android_utilities.library.views;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.support.v7.widget.AppCompatImageView;
-import android.util.AttributeSet;
+import ohos.global.resource.solidxml.Theme;
+import android.support.v7.widget.AppCompatImageView;//not found
+import android.util.AttributeSet;//no change
 
 import static com.matthewtamlin.android_utilities.library.R.styleable.SquareImageView;
 import static com.matthewtamlin.android_utilities.library.R.styleable.SquareImageView_derivedDimension;
@@ -112,7 +112,7 @@ public class SquareImageView extends AppCompatImageView {
 	 * 		0 to ignore
 	 */
 	private void init(final AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
-		final TypedArray attributes = getContext().obtainStyledAttributes(
+		final Theme attributes = getContext().obtainStyledAttributes(
 				attrs,
 				SquareImageView,
 				defStyleAttr,

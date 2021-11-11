@@ -16,9 +16,9 @@
 
 package com.matthewtamlin.android_utilities.library.helpers;
 
-import android.Manifest.permission;
-import android.content.Context;
-import android.support.v4.app.ActivityCompat;
+import android.Manifest.permission;//not found
+import ohos.app.Context;
+import android.support.v4.app.ActivityCompat;//not found
 
 import com.matthewtamlin.java_utilities.testing.Tested;
 
@@ -55,7 +55,7 @@ public class PermissionsHelper {
 		checkNotNull(permissions, "permissions cannot be null.");
 
 		for (final String permission : permissions) {
-			if (ActivityCompat.checkSelfPermission(context, permission) != PERMISSION_GRANTED) {
+			if (ActivityCompat.verifySelfPermission(context, permission) != PERMISSION_GRANTED) {
 				return false;
 			}
 		}
@@ -84,7 +84,7 @@ public class PermissionsHelper {
 		int grantedPermissions = 0;
 
 		for (final String permission : permissions) {
-			if (ActivityCompat.checkSelfPermission(context, permission) == PERMISSION_GRANTED) {
+			if (ActivityCompat.verifySelfPermission(context, permission) == PERMISSION_GRANTED) {
 				grantedPermissions++;
 			}
 		}

@@ -15,12 +15,15 @@
  */
 
 package com.matthewtamlin.android_utilities.library.helpers;
+import ohos.app.Context;
+//import android.content.Context;//
+import ohos.global.configuration.Configuration;//done
+import ohos.global.resource.ResourceManager;
+import ohos.agp.render.render3d.Engine;//not done
+import ohos.agp.window.service.DisplayManager;
+import ohos.agp.render.Paint;
 
-import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
+
 
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
@@ -38,8 +41,8 @@ public class ScreenSizeHelper {
 	public static ScreenSize getScreenSize(final Context context) {
 		checkNotNull(context, "context cannot be null");
 
-		final Resources res = context.getResources();
-		int config = res.getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
+		final ResourceManager res = context.getResourceManager();
+		int config = res.getDeviceCapability().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
 
 		switch (config) {
 			case Configuration.SCREENLAYOUT_SIZE_XLARGE: return ScreenSize.EXTRA_LARGE;
@@ -66,8 +69,8 @@ public class ScreenSizeHelper {
 		checkNotNull(context, "context cannot be null");
 
 		final DisplayMetrics metrics = new DisplayMetrics();
-		final WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-		wm.getDefaultDisplay().getMetrics(metrics);
+		final DisplayManager wm = (DisplayManager) context.getSystemService(Context.WINDOW_SERVICE);
+		wm.getDefaultDisplay().getFontMetrics(metrics);
 
 		return metrics.widthPixels;
 	}
@@ -87,8 +90,8 @@ public class ScreenSizeHelper {
 		checkNotNull(context, "context cannot be null");
 
 		final DisplayMetrics metrics = new DisplayMetrics();
-		final WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-		wm.getDefaultDisplay().getMetrics(metrics);
+		final DisplayManager wm = (DisplayManager) context.getSystemService(Context.WINDOW_SERVICE);
+		wm.getDefaultDisplay().getFontMetrics(metrics);//
 
 		return metrics.heightPixels;
 	}

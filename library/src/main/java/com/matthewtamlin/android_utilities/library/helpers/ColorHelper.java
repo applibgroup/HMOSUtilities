@@ -16,7 +16,8 @@
 
 package com.matthewtamlin.android_utilities.library.helpers;
 
-import android.graphics.Color;
+import ohos.agp.colors.Color;
+import ohos.agp.colors.RgbColor;
 
 import com.matthewtamlin.java_utilities.testing.Tested;
 
@@ -51,12 +52,12 @@ public class ColorHelper {
 
 		final float inverseRatio = 1f - ratio;
 
-		final float a = (Color.alpha(color1) * inverseRatio) + (Color.alpha(color2) * ratio);
-		final float r = (Color.red(color1) * inverseRatio) + (Color.red(color2) * ratio);
-		final float g = (Color.green(color1) * inverseRatio) + (Color.green(color2) * ratio);
-		final float b = (Color.blue(color1) * inverseRatio) + (Color.blue(color2) * ratio);
+		final float a = (Color.setAlpha(color1) * inverseRatio) + (Color.setAlpha(color2) * ratio);
+		final float r = (RgbColor.setRed(color1) * inverseRatio) + (Color.setRed(color2) * ratio);
+		final float g = (RgbColor.setGreen(color1) * inverseRatio) + (Color.setGreen(color2) * ratio);
+		final float b = (RgbColor.setBlue(color1) * inverseRatio) + (Color.setBlue(color2) * ratio);
 
-		return Color.argb((int) a, (int) r, (int) g, (int) b);
+		return RgbColor.fromRgbaInt((int) a, (int) r, (int) g, (int) b);
 	}
 
 	/**
@@ -69,9 +70,9 @@ public class ColorHelper {
 	 */
 	public static int calculateBestTextColor(final int backgroundColor) {
 		// sRGB [r, g, b]
-		final float[] preConversionValues = {((float) Color.red(backgroundColor)) / 255,
-				((float) Color.green(backgroundColor)) / 255,
-				((float) Color.blue(backgroundColor)) / 255};
+		final float[] preConversionValues = {((float) RgbColor.setRed(backgroundColor)) / 255,
+				((float) RgbColor.setGreen(backgroundColor)) / 255,
+				((float) RgbColor.setBlue(backgroundColor)) / 255};
 
 		// linear RGB [r', g', b']
 		final float[] postConversionValues = new float[3];
@@ -93,9 +94,9 @@ public class ColorHelper {
 				0.0722 * postConversionValues[2]);
 
 		if (luminance > 0.179) {
-			return Color.BLACK;
+			return RgbColor.BLACK;
 		} else {
-			return Color.WHITE;
+			return RgbColor.WHITE;
 		}
 	}
 
@@ -115,6 +116,6 @@ public class ColorHelper {
 		final int g = random.nextInt(256);
 		final int b = random.nextInt(256);
 
-		return Color.argb(a, r, g, b);
+		return RgbColor.fromRgbaInt(a, r, g, b);
 	}
 }

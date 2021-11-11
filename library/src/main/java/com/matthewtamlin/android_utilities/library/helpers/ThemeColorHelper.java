@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.matthewtamlin.android_utilities.library.helpers;
+package com.matthewtamlin.android_utilities.library.helpers;// not found
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.util.TypedValue;
+import android.content.Context;//done
+import ohos.global.resource.solidxml.Theme;//done
+import ohos.global.resource.solidxml.TypedAttribute;//done
 
-import com.matthewtamlin.android_utilities.library.R;
-import com.matthewtamlin.java_utilities.testing.Tested;
+import com.matthewtamlin.android_utilities.library.R;//not found
+import com.matthewtamlin.java_utilities.testing.Tested;//not found
 
-import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
+import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;//not found
 
 /**
  * Gets the core colors from the current theme.
@@ -105,8 +105,8 @@ public class ThemeColorHelper {
 			colorAttr) {
 		checkNotNull(context, "context cannot be null.");
 
-		final TypedValue v = new TypedValue();
-		final TypedArray a = context.obtainStyledAttributes(v.data, new int[]{colorAttr});
+		final TypedAttribute v = new TypedAttribute();
+		final Theme a = context.obtainStyledAttributes(v.data, new int[]{colorAttr});
 		final int color = a.getColor(0, defaultColor);
 
 		a.recycle();
