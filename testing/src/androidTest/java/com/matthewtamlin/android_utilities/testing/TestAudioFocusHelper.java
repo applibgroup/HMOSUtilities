@@ -17,7 +17,8 @@
 package com.matthewtamlin.android_utilities.testing;
 
 import android.content.Context;
-import android.media.AudioManager.OnAudioFocusChangeListener;
+import ohos.media.audio.AudioInterrupt.InterruptListener;
+//import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -36,16 +37,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class TestAudioFocusHelper {
 	private Context context;
 
-	private OnAudioFocusChangeListener listener;
+	private InterruptListener listener;
 
 	@Before
 	public void setup() {
 		context = InstrumentationRegistry.getTargetContext();
 
 		// Mockito cannot mock this interface, so just use an instance that does nothing when called
-		listener = new OnAudioFocusChangeListener() {
+		listener = new InterruptListener() {
 			@Override
-			public void onAudioFocusChange(int i) {
+			public void onInterrupt(int i) {
 				// Do nothing
 			}
 		};

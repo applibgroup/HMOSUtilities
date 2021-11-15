@@ -17,8 +17,11 @@
 package com.matthewtamlin.android_utilities.library.helpers;
 
 import android.content.Context;
-import android.media.AudioManager;
-import android.media.AudioManager.OnAudioFocusChangeListener;
+import ohos.media.audio.AudioManager;
+
+
+import ohos.media.audio.AudioInterrupt.InterruptListener;
+
 
 import com.matthewtamlin.java_utilities.testing.Tested;
 
@@ -34,7 +37,7 @@ public class AudioFocusHelper {
 	 * @param context
 	 * 		the Context in which {@code listener} is operating, not null
 	 * @param listener
-	 * 		the OnAudioFocusChangeListener to receive the audio focus, not null
+	 * 		the InterruptListener to receive the audio focus, not null
 	 *
 	 * @return true if audio focus is granted, false otherwise
 	 *
@@ -45,7 +48,7 @@ public class AudioFocusHelper {
 	 */
 	public static boolean requestStreamAlarmFocus(
 			final Context context,
-			final OnAudioFocusChangeListener listener) {
+			final InterruptListener listener) {
 
 		return requestStreamAudioFocus(context, listener, AudioManager.STREAM_ALARM);
 	}
@@ -56,7 +59,7 @@ public class AudioFocusHelper {
 	 * @param context
 	 * 		the Context in which {@code listener} is operating, not null
 	 * @param listener
-	 * 		the OnAudioFocusChangeListener to receive the audio focus, not null
+	 * 		the InterruptListener to receive the audio focus, not null
 	 *
 	 * @return true if audio focus is granted, false otherwise
 	 *
@@ -67,7 +70,7 @@ public class AudioFocusHelper {
 	 */
 	public static boolean requestStreamDtmfFocus(
 			final Context context,
-			final OnAudioFocusChangeListener listener) {
+			final InterruptListener listener) {
 
 		return requestStreamAudioFocus(context, listener, AudioManager.STREAM_DTMF);
 	}
@@ -78,7 +81,7 @@ public class AudioFocusHelper {
 	 * @param context
 	 * 		the Context in which {@code listener} is operating, not null
 	 * @param listener
-	 * 		the OnAudioFocusChangeListener to receive the audio focus, not null
+	 * 		the InterruptListener to receive the audio focus, not null
 	 *
 	 * @return true if audio focus is granted, false otherwise
 	 *
@@ -89,7 +92,7 @@ public class AudioFocusHelper {
 	 */
 	public static boolean requestStreamNotificationFocus(
 			final Context context,
-			final OnAudioFocusChangeListener listener) {
+			final InterruptListener listener) {
 
 		return requestStreamAudioFocus(context, listener, AudioManager.STREAM_NOTIFICATION);
 	}
@@ -100,7 +103,7 @@ public class AudioFocusHelper {
 	 * @param context
 	 * 		the Context in which {@code listener} is operating, not null
 	 * @param listener
-	 * 		the OnAudioFocusChangeListener to receive the audio focus, not null
+	 * 		the InterruptListener to receive the audio focus, not null
 	 *
 	 * @return true if audio focus is granted, false otherwise
 	 *
@@ -111,7 +114,7 @@ public class AudioFocusHelper {
 	 */
 	public static boolean requestStreamMusicFocus(
 			final Context context,
-			final OnAudioFocusChangeListener listener) {
+			final InterruptListener listener) {
 
 		return requestStreamAudioFocus(context, listener, AudioManager.STREAM_MUSIC);
 	}
@@ -122,7 +125,7 @@ public class AudioFocusHelper {
 	 * @param context
 	 * 		the Context in which {@code listener} is operating, not null
 	 * @param listener
-	 * 		the OnAudioFocusChangeListener to receive the audio focus, not null
+	 * 		the InterruptListener to receive the audio focus, not null
 	 *
 	 * @return true if audio focus is granted, false otherwise
 	 *
@@ -133,7 +136,7 @@ public class AudioFocusHelper {
 	 */
 	public static boolean requestStreamRingFocus(
 			final Context context,
-			final OnAudioFocusChangeListener listener) {
+			final InterruptListener listener) {
 
 		return requestStreamAudioFocus(context, listener, AudioManager.STREAM_RING);
 	}
@@ -144,7 +147,7 @@ public class AudioFocusHelper {
 	 * @param context
 	 * 		the Context in which {@code listener} is operating, not null
 	 * @param listener
-	 * 		the OnAudioFocusChangeListener to receive the audio focus, not null
+	 * 		the InterruptListener to receive the audio focus, not null
 	 *
 	 * @return true if audio focus is granted, false otherwise
 	 *
@@ -155,7 +158,7 @@ public class AudioFocusHelper {
 	 */
 	public static boolean requestStreamSystemFocus(
 			final Context context,
-			final OnAudioFocusChangeListener listener) {
+			final InterruptListener listener) {
 
 		return requestStreamAudioFocus(context, listener, AudioManager.STREAM_SYSTEM);
 	}
@@ -166,7 +169,7 @@ public class AudioFocusHelper {
 	 * @param context
 	 * 		the Context in which {@code listener} is operating, not null
 	 * @param listener
-	 * 		the OnAudioFocusChangeListener to receive the audio focus, not null
+	 * 		the InterruptListener to receive the audio focus, not null
 	 *
 	 * @return true if audio focus is granted, false otherwise
 	 *
@@ -177,7 +180,7 @@ public class AudioFocusHelper {
 	 */
 	public static boolean requestStreamVoiceCallFocus(
 			final Context context,
-			final OnAudioFocusChangeListener listener) {
+			final InterruptListener listener) {
 
 		return requestStreamAudioFocus(context, listener, AudioManager.STREAM_VOICE_CALL);
 	}
@@ -188,7 +191,7 @@ public class AudioFocusHelper {
 	 * @param context
 	 * 		the Context in which {@code listener} is operating, not null
 	 * @param listener
-	 * 		the OnAudioFocusChangeListener which will lose audio focus, not null
+	 * 		the InterruptListener which will lose audio focus, not null
 	 *
 	 * @throws IllegalArgumentException
 	 * 		if {@code context} is null
@@ -197,7 +200,7 @@ public class AudioFocusHelper {
 	 */
 	public static void abandonFocus(
 			final Context context,
-			final OnAudioFocusChangeListener listener) {
+			final InterruptListener listener) {
 
 		checkNotNull(context, "context cannot be null");
 		checkNotNull(listener, "listener cannot be null");
@@ -212,7 +215,7 @@ public class AudioFocusHelper {
 	 * @param context
 	 * 		the Context in which {@code listener} is operating, not null
 	 * @param listener
-	 * 		the OnAudioFocusChangeListener to receive the audio focus, not null
+	 * 		the InterruptListener to receive the audio focus, not null
 	 * @param streamType
 	 * 		the type of stream to request (see static fields of AudioManager)
 	 *
@@ -225,14 +228,14 @@ public class AudioFocusHelper {
 	 */
 	private static boolean requestStreamAudioFocus(
 			final Context context,
-			final OnAudioFocusChangeListener listener,
+			final InterruptListener listener,
 			final int streamType) {
 
 		checkNotNull(context, "context cannot be null");
 		checkNotNull(listener, "listener cannot be null");
 
 		final AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-		final int result = am.requestAudioFocus(listener, streamType, AudioManager.AUDIOFOCUS_GAIN);
+		final int result = am.activateAudioInterrupt(listener, streamType, AudioManager.AUDIOFOCUS_GAIN);
 
 		return result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
 	}

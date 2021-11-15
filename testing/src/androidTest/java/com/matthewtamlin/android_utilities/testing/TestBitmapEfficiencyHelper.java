@@ -16,10 +16,11 @@
 
 package com.matthewtamlin.android_utilities.testing;
 
-import android.content.Context;
+import ohos.app.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import ohos.media.image.ImagePacker;
+import ohos.media.image.PixelMap;
+import ohos.media.image.ImageSource;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -49,13 +50,14 @@ public class TestBitmapEfficiencyHelper {
 
 	private Context context;
 
-	private Bitmap fullSizeImage;
+	private PixelMap fullSizeImage;
+	private ImagePacker sizeImage;
 
 	@Before
 	public void setup() {
 		// Using the target context provides access to the raw resources
 		context = InstrumentationRegistry.getTargetContext();
-		fullSizeImage = BitmapFactory.decodeResource(context.getResources(), IMAGE_RES_ID);
+		fullSizeImage = ImageSource.createPixelmap(context.getResourceManager(), IMAGE_RES_ID);
 
 		assertThat("Precondition 1 failed.", context, is(notNullValue()));
 		assertThat("Precondition 2 failed.", fullSizeImage, is(notNullValue()));
@@ -104,8 +106,8 @@ public class TestBitmapEfficiencyHelper {
 	 */
 	@Test
 	public void testCalculateSamplingRate_validArgs_tryScalingUp() {
-		final int rawWidth = fullSizeImage.getWidth();
-		final int rawHeight = fullSizeImage.getHeight();
+		final int rawWidth = fullSizeImage.getImageInfo();
+		final int rawHeight = fullSizeImage.getImageInfo();
 		final int desWidth = rawWidth * 2;
 		final int desHeight = rawHeight * 2;
 
@@ -122,8 +124,8 @@ public class TestBitmapEfficiencyHelper {
 	 */
 	@Test
 	public void testCalculateSamplingRate_validArgs_tryScalingDown() {
-		final int rawWidth = fullSizeImage.getWidth();
-		final int rawHeight = fullSizeImage.getHeight();
+		final int rawWidth = fullSizeImage.getImageInfo();
+		final int rawHeight = fullSizeImage.getImageInfo();
 		final int desWidth = rawWidth / 2;
 		final int desHeight = rawHeight / 2;
 
@@ -148,7 +150,7 @@ public class TestBitmapEfficiencyHelper {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testDecodeResource_invalidArg_negativeWidth() {
-		decodeResource(context.getResources(), IMAGE_RES_ID, -1, 10);
+		decodeResource(context.getResourceManager(), IMAGE_RES_ID, -1, 10);
 	}
 
 	/**
@@ -157,7 +159,7 @@ public class TestBitmapEfficiencyHelper {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testDecodeResource_invalidArg_negativeHeight() {
-		decodeResource(context.getResources(), IMAGE_RES_ID, 10, -1);
+		decodeResource(context.getResourceManager(), IMAGE_RES_ID, 10, -1);
 	}
 
 	/**
@@ -169,7 +171,7 @@ public class TestBitmapEfficiencyHelper {
 	public void testDecodeResource_nonExistentResource() {
 		final int badResId = 1000;
 
-		final Bitmap image = decodeResource(context.getResources(), badResId, 10, 10);
+		final Bitmap image = decodeResource(context.getResourceManager(), badResId, 10, 10);
 
 		assertThat("Somehow a Bitmap was decoded.", image, is(nullValue()));
 	}
@@ -180,17 +182,17 @@ public class TestBitmapEfficiencyHelper {
 	 */
 	@Test
 	public void testDecodeResource_validArgs() {
-		final int testWidth = fullSizeImage.getWidth() / 2;
-		final int testHeight = fullSizeImage.getHeight() / 2;
+		final int testWidth = fullSizeImage.getImageInfo() / 2;
+		final int testHeight = fullSizeImage.getImageInfo() / 2;
 
-		final Bitmap decodedImage = decodeResource(context.getResources(), IMAGE_RES_ID,
+		final Bitmap decodedImage = decodeResource(context.getResourceManager(), IMAGE_RES_ID,
 				testWidth, testHeight);
 
 		assertThat("Decoded image should not be null.", decodedImage, is(notNullValue()));
 		assertThat("Width was not reduced.", decodedImage.getWidth(), is(lessThan(
-				fullSizeImage.getWidth())));
+				fullSizeImage.getImageInfo())));
 		assertThat("Height was not reduced.", decodedImage.getHeight(), is(lessThan(
-				fullSizeImage.getHeight())));
+				fullSizeImage.getImageInfo())));
 	}
 
 	/**
@@ -246,20 +248,20 @@ public class TestBitmapEfficiencyHelper {
 	public void testDecodeByteArray_validArgs() {
 		// The test artwork is needed as a byte array
 		final ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		fullSizeImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+		sizeImage.initializePacking(Bitmap.CompressFormat.PNG, 100, stream);
 		final byte[] fullSizeImageData = stream.toByteArray();
 
-		final int testWidth = fullSizeImage.getWidth() / 2;
-		final int testHeight = fullSizeImage.getHeight() / 2;
+		final int testWidth = fullSizeImage.getImageInfo() / 2;
+		final int testHeight = fullSizeImage.getImageInfo() / 2;
 
 		final Bitmap decodedImage = BitmapEfficiencyHelper.decodeByteArray(fullSizeImageData, 0,
 				fullSizeImageData.length, testWidth, testHeight);
 
 		assertThat("Decoded image should not be null.", decodedImage, is(notNullValue()));
 		assertThat("Width was not reduced.", decodedImage.getWidth(), is(lessThan(fullSizeImage
-				.getWidth())));
+				.getImageInfo())));
 		assertThat("Height was not reduced.", decodedImage.getHeight(), is(lessThan(fullSizeImage
-				.getHeight())));
+				.getImageInfo())));
 	}
 
 	/**

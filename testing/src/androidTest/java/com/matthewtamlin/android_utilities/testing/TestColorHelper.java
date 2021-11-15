@@ -16,7 +16,7 @@
 
 package com.matthewtamlin.android_utilities.testing;
 
-import android.support.test.runner.AndroidJUnit4;
+import android.support.test.runner.AndroidJUnit4;//not found
 
 
 import com.matthewtamlin.android_utilities.library.helpers.ColorHelper;

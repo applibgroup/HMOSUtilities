@@ -16,7 +16,7 @@
 
 package com.matthewtamlin.android_utilities.testing;
 
-import android.os.Bundle;
+import ohos.utils.PacMap;
 
 import com.matthewtamlin.android_testing_tools.library.harnesses.EmptyTestHarness;
 import com.matthewtamlin.android_utilities.library.helpers.ColorHelper;
@@ -27,7 +27,7 @@ import com.matthewtamlin.android_utilities.library.helpers.ColorHelper;
  */
 public class ThemeColorHelperTestHarness extends EmptyTestHarness {
 	@Override
-	protected final void onCreate(final Bundle savedInstanceState) {
+	protected final void onCreate(final PacMap savedInstanceState) {
 		setTheme(R.style.TestTheme);
 		super.onCreate(savedInstanceState);
 	}

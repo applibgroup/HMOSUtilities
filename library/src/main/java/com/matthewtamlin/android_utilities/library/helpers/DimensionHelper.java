@@ -16,9 +16,9 @@
 
 package com.matthewtamlin.android_utilities.library.helpers;
 
-import android.content.Context;
+import ohos.app.Context;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
+import ohos.global.resource.solidxml.TypedAttribute;
 
 import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterThanOrEqualTo;
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
@@ -46,8 +46,8 @@ public class DimensionHelper {
 		checkNotNull(context, "context cannot be null.");
 		checkGreaterThanOrEqualTo((int) dpValue, 0, "dpValue must be at least 0.");
 
-		final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpValue, metrics);
+		final DisplayMetrics metrics = context.getResourceManager().getDisplayMetrics();
+		return (int) TypedAttribute.computeTranslateRatio(TypedAttribute.COMPLEX_UNIT_DIP, dpValue, metrics);
 	}
 
 	/**
@@ -69,8 +69,8 @@ public class DimensionHelper {
 		checkNotNull(context, "context cannot be null.");
 		checkGreaterThanOrEqualTo((int) spValue, 0, "spValue must be at least 0.");
 
-		final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spValue, metrics);
+		final DisplayMetrics metrics = context.getResourceManager().getDisplayMetrics();
+		return TypedAttribute.computeTranslateRatio(TypedAttribute.COMPLEX_UNIT_SP, spValue, metrics);
 	}
 
 	/**
@@ -92,8 +92,8 @@ public class DimensionHelper {
 		checkNotNull(context, "context cannot be null.");
 		checkGreaterThanOrEqualTo((int) inValue, 0, "inValue must be at least 0.");
 
-		final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_IN, inValue, metrics);
+		final DisplayMetrics metrics = context.getResourceManager().getDisplayMetrics();
+		return TypedAttribute.computeTranslateRatio(TypedAttribute.COMPLEX_UNIT_IN, inValue, metrics);
 	}
 
 	/**
@@ -115,8 +115,8 @@ public class DimensionHelper {
 		checkNotNull(context, "context cannot be null.");
 		checkGreaterThanOrEqualTo((int) mmValue, 0, "mmValue must be at least 0.");
 
-		final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, mmValue, metrics);
+		final DisplayMetrics metrics = context.getResourceManager().getDisplayMetrics();
+		return TypedAttribute.computeTranslateRatio(TypedAttribute.COMPLEX_UNIT_MM, mmValue, metrics);
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class DimensionHelper {
 		checkNotNull(context, "context cannot be null.");
 		checkGreaterThanOrEqualTo((int) ptValue, 0, "ptValue must be at least 0.");
 
-		final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PT, ptValue, metrics);
+		final DisplayMetrics metrics = context.getResourceManager().getDisplayMetrics();
+		return TypedAttribute.computeTranslateRatio(TypedAttribute.COMPLEX_UNIT_PT, ptValue, metrics);
 	}
 }

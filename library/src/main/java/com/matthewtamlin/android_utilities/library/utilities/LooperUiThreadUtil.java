@@ -16,8 +16,8 @@
 
 package com.matthewtamlin.android_utilities.library.utilities;
 
-import android.os.Handler;
-import android.os.Looper;
+import ohos.eventhandler.EventHandler;
+import ohos.eventhandler.EventRunner;
 
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
@@ -31,7 +31,7 @@ public class LooperUiThreadUtil implements UiThreadUtil {
 	/**
 	 * The looper which provides UI thread access.
 	 */
-	private final Looper looper;
+	private final EventRunner looper;
 
 	/**
 	 * Constructs a new LooperUiThreadUtil which uses the supplied looper to access the UI thread.
@@ -44,7 +44,7 @@ public class LooperUiThreadUtil implements UiThreadUtil {
 	 * @throws IllegalArgumentException
 	 * 		if {@code looper} is null
 	 */
-	public static LooperUiThreadUtil createUsingLooper(final Looper looper) {
+	public static LooperUiThreadUtil createUsingLooper(final EventRunner looper) {
 		return new LooperUiThreadUtil(looper);
 	}
 
@@ -54,7 +54,7 @@ public class LooperUiThreadUtil implements UiThreadUtil {
 	 * @return the new LooperUiThreadUtil, not null
 	 */
 	public static LooperUiThreadUtil createUsingMainLooper() {
-		return new LooperUiThreadUtil(Looper.getMainLooper());
+		return new LooperUiThreadUtil(EventRunner.getMainEventRunner());
 	}
 
 	/**
@@ -63,23 +63,23 @@ public class LooperUiThreadUtil implements UiThreadUtil {
 	 * @param looper
 	 * 		the looper to use, not null
 	 */
-	private LooperUiThreadUtil(final Looper looper) {
+	private LooperUiThreadUtil(final EventRunner looper) {
 		this.looper = checkNotNull(looper, "looper cannot be null");
 	}
 
 	@Override
 	public void runOnUiThread(final Runnable runnable) {
 		if (runnable != null) {
-			final Handler handler = new Handler(looper);
-			handler.post(runnable);
+			final EventHandler handler = new EventHandler(looper);
+			handler.postTask(runnable);
 		}
 	}
 
 	@Override
 	public void runOnUiThreadWithDelay(final Runnable runnable, final long delayMilliseconds) {
 		if (runnable != null) {
-			final Handler handler = new Handler(looper);
-			handler.postDelayed(runnable, delayMilliseconds);
+			final EventHandler handler = new EventHandler(looper);
+			handler.postTask(runnable, delayMilliseconds);
 		}
 	}
 }

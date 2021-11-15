@@ -16,11 +16,11 @@
 
 package com.matthewtamlin.android_utilities.testing;
 
-import android.Manifest;
+import android.Manifest;//no change
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.content.ContextCompat;
+import android.support.test.InstrumentationRegistry;//not found
+import android.support.test.runner.AndroidJUnit4;//not found
+import android.support.v4.content.ContextCompat;//not found
 
 import com.matthewtamlin.android_utilities.library.helpers.PermissionsHelper;
 

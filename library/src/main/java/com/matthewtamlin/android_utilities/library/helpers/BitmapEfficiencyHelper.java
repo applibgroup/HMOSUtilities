@@ -16,9 +16,9 @@
 
 package com.matthewtamlin.android_utilities.library.helpers;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import ohos.global.resource.ResourceManager;
+import ohos.media.image.PixelMap;
+import ohos.media.image.ImageSource;
 
 import com.matthewtamlin.java_utilities.testing.Tested;
 
@@ -100,8 +100,8 @@ public class BitmapEfficiencyHelper {
 	 * @throws IllegalArgumentException
 	 * 		if any dimension is less than zero
 	 */
-	public static Bitmap decodeResource(
-			final Resources res,
+	public static PixelMap decodeResource(
+			final ResourceManager res,
 			final int resId,
 			final int desWidth,
 			final int desHeight) {
@@ -113,7 +113,7 @@ public class BitmapEfficiencyHelper {
 		// Decode only the boundaries of the image to get its dimensions
 		final BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;
-		BitmapFactory.decodeResource(res, resId, options);
+		ImageSource.createPixelmap(res, resId, options);
 
 		// Decode the full image using sub-sampling
 		final int rawWidth = options.outWidth;
@@ -122,7 +122,7 @@ public class BitmapEfficiencyHelper {
 		options.inJustDecodeBounds = false; // Decode the full image
 		options.inScaled = false;
 
-		return BitmapFactory.decodeResource(res, resId, options);
+		return ImageSource.createPixelmap(res, resId, options);
 	}
 
 	/**
@@ -155,8 +155,8 @@ public class BitmapEfficiencyHelper {
 	 * @throws IllegalArgumentException
 	 * 		if {@code desHeight} is less than zero
 	 */
-	public static Bitmap decodeByteArray(final byte[] data, final int offset, final int length,
-			final int desWidth, final int desHeight) {
+	public static PixelMap decodeByteArray(final byte[] data, final int offset, final int length,
+										   final int desWidth, final int desHeight) {
 		checkNotNull(data, "data cannot be null.");
 		checkGreaterThanOrEqualTo(offset, 0, "offset must be at least zero.");
 		checkLessThan(offset, data.length, "offset must be less than " + data.length);
@@ -169,7 +169,7 @@ public class BitmapEfficiencyHelper {
 		// Decode only the boundaries of the image to get its dimensions
 		final BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;
-		BitmapFactory.decodeByteArray(data, offset, length, options);
+		ImageSource.createPixelmap(data, offset, length, options);
 
 		// Decode the full image using sub-sampling
 		final int rawWidth = options.outWidth;
@@ -178,7 +178,7 @@ public class BitmapEfficiencyHelper {
 		options.inJustDecodeBounds = false; // Decode the full image
 		options.inScaled = false;
 
-		return BitmapFactory.decodeByteArray(data, offset, length, options);
+		return ImageSource.createPixelmap(data, offset, length, options);
 	}
 
 	/**
@@ -203,7 +203,7 @@ public class BitmapEfficiencyHelper {
 	 * @throws IllegalArgumentException
 	 * 		if {@code desHeight} is less than zero
 	 */
-	public static Bitmap decodeByteArray(
+	public static PixelMap decodeByteArray(
 			final byte[] data,
 			final int desWidth,
 			final int desHeight) {
@@ -232,7 +232,7 @@ public class BitmapEfficiencyHelper {
 	 * @throws IllegalArgumentException
 	 * 		if {@code desHeight} is less than zero
 	 */
-	public static Bitmap decodeFile(final File file, final int desWidth, final int desHeight) {
+	public static PixelMap decodeFile(final File file, final int desWidth, final int desHeight) {
 		checkNotNull(file, "file cannot be null.");
 		checkGreaterThanOrEqualTo(desWidth, 0, "desWidth must be at least zero.");
 		checkGreaterThanOrEqualTo(desHeight, 0, "desHeight must be at least zero.");
@@ -240,7 +240,7 @@ public class BitmapEfficiencyHelper {
 		// Decode only the boundaries of the image to get its dimensions
 		final BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;
-		BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+		ImageSource.createPixelmap(file.getAbsolutePath(), options);
 
 		// Decode the full image using sub-sampling
 		final int rawWidth = options.outWidth;
@@ -249,6 +249,6 @@ public class BitmapEfficiencyHelper {
 		options.inJustDecodeBounds = false;
 		options.inScaled = false;
 
-		return BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+		return ImageSource.createPixelmap(file.getAbsolutePath(), options);
 	}
 }
